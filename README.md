@@ -41,7 +41,7 @@
 - **Frontend:** React (w/ Hooks) + TypeScript
 - **Styling:** Tailwind CSS + ShadCN Components
 - **State Management:** React `useState`, `useEffect`
-- **Data Fetching:** Fetch API / Axios
+- **Data Fetching:** Axios
 - **API Used:** [TMDB (The Movie Database) API](https://developer.themoviedb.org/reference/intro/getting-started)
 
 ## ⚙️ Setup & Installation
@@ -79,7 +79,3 @@ npm run dev  # or yarn dev
 - **Movie Ratings & Genres** – Assumed that every movie from the API has a valid genre and rating.
 - **Pagination** – The app fetches and displays only a limited number of movies to optimize performance.
 - **CRUD Operations** – The **"Add Movies"** section supports full CRUD, while API-fetched movies are read-only.(User-added movies are stored in local storage for persistence.)
-
-```
-
-```
