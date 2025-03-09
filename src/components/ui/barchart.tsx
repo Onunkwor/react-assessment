@@ -85,7 +85,6 @@ export function BarChartComponent({
       ])
     ),
   };
-  console.log(genreData);
 
   return (
     <Card>
