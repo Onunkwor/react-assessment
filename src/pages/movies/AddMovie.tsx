@@ -74,7 +74,6 @@ const AddMovie = ({
   onComplete?: () => void;
 }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState("basic");
   const isEditing = !!movieId;
   const navigate = useNavigate();
   const form = useForm<MovieFormValues>({
@@ -94,7 +93,7 @@ const AddMovie = ({
   useEffect(() => {
     if (movieId) {
       const movies = JSON.parse(localStorage.getItem("movies") || "[]");
-      const existingMovie = movies.find((m: any) => m.id === movieId);
+      const existingMovie = movies.find((m: any) => m.id === Number(movieId));
       if (existingMovie) {
         form.reset(existingMovie);
         setImagePreview(existingMovie.image);
@@ -320,8 +319,8 @@ const AddMovie = ({
               />
             </CardContent>
 
-            <CardFooter className="flex gap-2 justify-between px-6 py-4 bg-gray-50 border-t">
-              <Button
+            <CardFooter className="flex gap-2  px-6 py-4 bg-gray-50 border-t">
+              {/* <Button
                 type="button"
                 variant="outline"
                 onClick={() => {
@@ -333,24 +332,12 @@ const AddMovie = ({
                 }}
               >
                 {activeTab === "details" ? "Back" : "Cancel"}
-              </Button>
+              </Button> */}
 
               <div className="flex gap-2">
-                {activeTab === "basic" && (
-                  <Button
-                    type="button"
-                    onClick={() => setActiveTab("details")}
-                    variant="secondary"
-                  >
-                    Next
-                  </Button>
-                )}
-
                 <Button
                   type="submit"
-                  className={`bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 ${
-                    activeTab === "basic" ? "hidden md:inline-flex" : ""
-                  }`}
+                  className={`bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 ${"md:inline-flex"}`}
                 >
                   {isEditing ? "Update Movie" : "Save Movie"}
                 </Button>

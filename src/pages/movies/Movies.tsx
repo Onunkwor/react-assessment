@@ -123,7 +123,7 @@ const Movies: React.FC = () => {
     );
     setMovies(storedMovies);
   }, []);
-  console.log(movies);
+  // console.log(movies);
 
   // Loading State with Skeleton UI
   if (isPending) {
@@ -168,6 +168,7 @@ const Movies: React.FC = () => {
         releaseDate: m.release_date,
         overview: m.overview,
         isOwn: true,
+        id: m.id,
       };
     });
     localStorage.setItem("movies", JSON.stringify(mappedMovies));
