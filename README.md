@@ -59,3 +59,22 @@ cp .env.example .env   # Add your API key
 # Start the development server
 npm run dev  # or yarn dev
 ```
+
+## 📌 Key Decisions & Assumptions
+
+### 🚀 Technology Choices
+
+- **React with TypeScript** – Used for type safety and improved developer experience.
+- **State Management** – Chose React's `useState` and `useEffect` instead of Redux for simplicity, given the project scope.
+- **UI Components** – Used **ShadCN + Tailwind CSS** for a clean, modern UI.
+
+### 🔗 API & Data Handling
+
+- **TMDB API Integration** – Used TMDB API for fetching movie data instead of creating a mock backend.
+- **Optimized Search** – Implemented **debouncing** in the search feature to optimize API calls and avoid unnecessary requests.
+
+### 🔍 Assumptions Made
+
+- **Movie Ratings & Genres** – Assumed that every movie from the API has a valid genre and rating.
+- **Pagination** – The app fetches and displays only a limited number of movies to optimize performance.
+- **CRUD Operations** – The **"Add Movies"** section supports full CRUD, while API-fetched movies are read-only.
