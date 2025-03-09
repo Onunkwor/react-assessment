@@ -1,54 +1,61 @@
-# React + TypeScript + Vite
+# 🎬 Movie Collection Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Overview
 
-Currently, two official plugins are available:
+**Movie Collection Dashboard** is a responsive React application that allows users to manage their personal movie collection. It includes features such as filtering, search, CRUD operations, and data visualization. The application fetches external movie data using an API and provides an interactive user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo & Repository
 
-## Expanding the ESLint configuration
+- 🔗 **Live Demo:** [Movie Dashboard](https://react-assessment-virid.vercel.app/dashboard)
+- 📦 **GitHub Repository:** [GitHub Repo](https://github.com/Onunkwor/react-assessment)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### ✅ Core Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Movie List Display** – Shows movies with details (title, year, genre, rating).
+- **Search & Filtering** – Users can search movies and filter by genre.
+- **CRUD Operations** – Add, edit, delete movies from the collection.
+- **Statistics Dashboard** – Provides insights like top-rated movies and genre distribution.
+- **Responsive UI** – Adapts to different screen sizes.
+- **DeepSeek Explanation** – Uses DeepSeek to convince users to watch the movie.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ✨ Newly Added Features
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+- **Genre-Based Filtering & Search for "My Movies" Section**
+  - Users can filter their personal collection by selecting a genre.
+  - Real-time search allows finding movies by title.
+- **Movie API Integration**
+  - Fetches a list of trending/popular movies from an external API.
+  - Displays additional movie suggestions.
+- **Optimized State Management**
+  - Efficient use of React Hooks to manage state without unnecessary re-renders.
+- **Error Handling & Loading States**
+  - Displays loading skeletons and error messages for better UX.
+- **Improved UI/UX**
+  - Uses ShadCN components for a modern and consistent design.
+
+## 🏗️ Tech Stack
+
+- **Frontend:** React (w/ Hooks) + TypeScript
+- **Styling:** Tailwind CSS + ShadCN Components
+- **State Management:** React `useState`, `useEffect`
+- **Data Fetching:** Fetch API / Axios
+- **API Used:** [TMDB (The Movie Database) API](https://developer.themoviedb.org/reference/intro/getting-started)
+
+## ⚙️ Setup & Installation
+
+```sh
+# Clone the repository
+git clone https://github.com/Onunkwor/react-assessment.git
+cd react-assessment
+
+# Install dependencies
+npm install  # or yarn install
+
+# Set up environment variables
+cp .env.example .env   # Add your API key
+
+# Start the development server
+npm run dev  # or yarn dev
 ```

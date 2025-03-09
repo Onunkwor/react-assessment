@@ -159,7 +159,18 @@ const Movies: React.FC = () => {
   }
   const handleDelete = (movieId: number) => {
     const updatedMovies = movies.filter((m) => m.id !== movieId);
-    localStorage.setItem("movies", JSON.stringify(updatedMovies));
+    const mappedMovies = updatedMovies.map((m) => {
+      return {
+        title: m.title,
+        image: m.poster_path,
+        rating: m.vote_count,
+        genre: m.genres,
+        releaseDate: m.release_date,
+        overview: m.overview,
+        isOwn: true,
+      };
+    });
+    localStorage.setItem("movies", JSON.stringify(mappedMovies));
     setMovies(updatedMovies);
     toast.success("Movie deleted successfully");
   };
