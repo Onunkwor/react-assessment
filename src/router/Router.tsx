@@ -1,5 +1,6 @@
 import NotFound from "@/pages/404/NotFound";
 import Dashboard from "@/pages/dashboard/Dashboard";
+import EditMovie from "@/pages/edit-movie/EditMovie";
 import Layout from "@/pages/layout/Layout";
 import AddMovie from "@/pages/movies/AddMovie";
 import Movies from "@/pages/movies/Movies";
@@ -31,6 +32,10 @@ export const AppRouter = () => {
         {
           path: "/add-movie",
           element: <AddMovie />,
+        },
+        {
+          path: "/edit-movie/:id",
+          element: <EditMovie />,
         },
 
         {

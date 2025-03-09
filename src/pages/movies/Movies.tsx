@@ -1,8 +1,17 @@
-import React, { JSX } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { Card, Carousel } from "@/components/ui/movie-cards-carousel";
 import { useGetMovies } from "@/lib/tanstack/query";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export interface MovieCard {
   adult: boolean;
@@ -49,7 +58,24 @@ const ErrorDisplay: React.FC<{ message?: string }> = ({ message }) => (
     </AlertDescription>
   </Alert>
 );
-
+// Common movie genres
+const commonGenres = [
+  "All", // Added for 'Show All' functionality
+  "Action",
+  "Adventure",
+  "Animation",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Fantasy",
+  "Horror",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Thriller",
+  "Western",
+];
 // Movie Section Component
 const MovieSection: React.FC<{
   title: string;
@@ -69,10 +95,13 @@ const MovieSection: React.FC<{
 );
 
 const Movies: React.FC = () => {
+  const [movies, setMovies] = useState<MovieCard[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("All");
   const { data, isPending, error } = useGetMovies();
-  const movies = JSON.parse(localStorage.getItem("movies") || "[]").map(
-    (data: any) => {
-      return {
+  useEffect(() => {
+    const storedMovies = JSON.parse(localStorage.getItem("movies") || "[]").map(
+      (data: any) => ({
         adult: data.adult ?? false,
         backdrop_path: data.image ?? "",
         genre_ids: data.genre_ids ?? [],
@@ -90,10 +119,10 @@ const Movies: React.FC = () => {
         vote_average: data.rating ?? 0,
         vote_count: data.vote_count ?? 0,
         isOwn: data.isOwn,
-      };
-    }
-  );
-
+      })
+    );
+    setMovies(storedMovies);
+  }, []);
   console.log(movies);
 
   // Loading State with Skeleton UI
@@ -128,7 +157,22 @@ const Movies: React.FC = () => {
       </div>
     );
   }
+  const handleDelete = (movieId: number) => {
+    const updatedMovies = movies.filter((m) => m.id !== movieId);
+    localStorage.setItem("movies", JSON.stringify(updatedMovies));
+    setMovies(updatedMovies);
+    toast.success("Movie deleted successfully");
+  };
 
+  // **Filter logic**
+  const filteredMovies = movies.filter((movie) => {
+    const matchesSearch = movie.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesGenre =
+      selectedGenre === "All" || movie.genres.includes(selectedGenre);
+    return matchesSearch && matchesGenre;
+  });
   // Map movie data to components
   const popularMovieCards = data?.popular.map(
     (card: MovieCard, index: number) => (
@@ -159,14 +203,18 @@ const Movies: React.FC = () => {
       <Card key={card.id} card={card} index={index} />
     )
   );
-
-  const myMoviesCard = movies.map((card: MovieCard, index: number) => (
-    <Card key={card.id} card={card} index={index} />
+  const myMoviesCard = filteredMovies.map((card: MovieCard, index: number) => (
+    <Card
+      key={card.id}
+      card={card}
+      index={index}
+      onDelete={() => handleDelete(card.id)}
+    />
   ));
 
   return (
     <div className="w-full h-full py-8 overflow-y-auto bg-gray-50 dark:bg-gray-900 transition-colors">
-      <header className="max-w-7xl mx-auto px-4 mb-10">
+      <header className="max-w-7xl mx-auto px-4 mb-6">
         <h1 className="text-3xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">
           Movie Collections
         </h1>
@@ -175,9 +223,41 @@ const Movies: React.FC = () => {
         </p>
       </header>
 
+      {/* My Movies Section */}
       {myMoviesCard.length > 0 && (
-        <MovieSection title="My Movies" movies={myMoviesCard} />
+        <>
+          {/* Search & Filter Section */}
+          <div className="max-w-7xl mx-auto px-4 mb-6 flex flex-col md:flex-row gap-4">
+            {/* Search Input */}
+            <Input
+              placeholder="Search My Movies..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full md:w-1/2"
+            />
+
+            {/* Genre Filter */}
+            <Select
+              onValueChange={(value) => setSelectedGenre(value)}
+              defaultValue="All"
+            >
+              <SelectTrigger className="w-full md:w-1/3">
+                <SelectValue placeholder="Filter by Genre" />
+              </SelectTrigger>
+              <SelectContent>
+                {commonGenres.map((genre) => (
+                  <SelectItem key={genre} value={genre}>
+                    {genre}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <MovieSection title="My Movies" movies={myMoviesCard} />
+        </>
       )}
+
+      {/* Other Movie Sections */}
       <MovieSection title="Popular Movies" movies={popularMovieCards} />
       <MovieSection title="Top Rated Movies" movies={topRatedMovieCards} />
       <MovieSection title="Trending Movies" movies={trendingMovieCards} />

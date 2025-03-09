@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import Markdown from "react-markdown";
 import { getAIExplanation } from "@/lib/api/api";
+import { useNavigate } from "react-router-dom";
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -166,10 +167,12 @@ export const Card = ({
   card,
   index,
   layout = false,
+  onDelete,
 }: {
   card: Card;
   index: number;
   layout?: boolean;
+  onDelete?: () => void;
 }) => {
   const [open, setOpen] = useState(false);
   // const [aiRecommendation, setAiRecommendation] = useState("");
@@ -241,6 +244,13 @@ export const Card = ({
   // Image base URLs - replace with your actual image URLs
   const backdropBaseUrl = "https://image.tmdb.org/t/p/original";
   const posterBaseUrl = "https://image.tmdb.org/t/p/w500";
+  const navigate = useNavigate();
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(); // Call the delete function with the movie ID
+      setOpen(false);
+    }
+  };
 
   return (
     <>
@@ -348,13 +358,13 @@ export const Card = ({
                   {card.isOwn && (
                     <div className="flex gap-2">
                       <button
-                        // onClick={}
+                        onClick={() => navigate(`/edit-movie/${card.id}`)}
                         className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg transition duration-300"
                       >
                         ✏️ Edit
                       </button>
                       <button
-                        // onClick={}
+                        onClick={handleDelete}
                         className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg transition duration-300"
                       >
                         🗑️ Delete

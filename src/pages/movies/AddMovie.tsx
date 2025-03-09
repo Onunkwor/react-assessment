@@ -124,7 +124,7 @@ const AddMovie = ({
       localStorage.setItem("movies", JSON.stringify(updatedMovies));
     } else {
       // Adding new movie
-      const newMovie = { id: crypto.randomUUID(), ...values };
+      const newMovie = { id: Date.now(), ...values };
       localStorage.setItem("movies", JSON.stringify([...movies, newMovie]));
     }
 
