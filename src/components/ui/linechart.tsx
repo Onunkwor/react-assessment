@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import {
   CartesianGrid,
   Dot,
@@ -18,7 +17,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -92,10 +90,10 @@ export function LineChartComponent({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Top Rated Movies (January - June 2024)</CardTitle>
+        <CardTitle>Top Rated Movies </CardTitle>
         <CardDescription>
-          A visual representation of the highest-rated movies from the first
-          half of 2024, based on audience and critic scores
+          A visual representation of the highest-rated movies based on audience
+          and critic scores
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -131,16 +129,22 @@ export function LineChartComponent({
             />
           </LineChart>
         </ChartContainer>
+
+        {/* 🔥 Added legend under the chart */}
+        <div className="flex flex-wrap justify-center gap-4">
+          {chartData.map((movie, index) => (
+            <div key={index} className="flex items-center gap-2">
+              <div
+                className="h-3 w-3 rounded-full"
+                style={{ backgroundColor: movie.fill }}
+              />
+              <span className="text-sm text-muted-foreground">
+                {movie.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="flex gap-2 font-medium leading-none">
-          Average ratings have increased by 5.2% this month{" "}
-          <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Displaying top-rated movies over the last six months.
-        </div>
-      </CardFooter>
     </Card>
   );
 }

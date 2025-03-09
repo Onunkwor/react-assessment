@@ -72,13 +72,13 @@ export function PieChartComponent({
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={dynamicChartConfig}
-          className="mx-auto aspect-square max-h-[300px]"
+          className="mx-auto w-full max-w-[400px] aspect-square"
         >
           <PieChart>
             <Pie data={chartData} dataKey="value" />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
-              className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+              className="grid grid-cols-2 gap-x-6 gap-y-2 justify-items-center"
             />
           </PieChart>
         </ChartContainer>
