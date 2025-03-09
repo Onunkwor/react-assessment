@@ -15,10 +15,11 @@
 
 - **Movie List Display** – Shows movies with details (title, year, genre, rating).
 - **Search & Filtering** – Users can search movies and filter by genre.
-- **CRUD Operations** – Add, edit, delete movies from the collection.
+- **CRUD Operations** – Add, edit, and delete movies from the collection. _(Movies are stored in local storage for persistence.)_
 - **Statistics Dashboard** – Provides insights like top-rated movies and genre distribution.
 - **Responsive UI** – Adapts to different screen sizes.
-- **DeepSeek Explanation** – Uses DeepSeek to convince users to watch the movie.
+- **🚀 DeepSeek Explanation** –  
+  ✨ **Uses DeepSeek to generate persuasive movie descriptions, encouraging users to watch!**
 
 ### ✨ Newly Added Features
 
@@ -77,4 +78,8 @@ npm run dev  # or yarn dev
 
 - **Movie Ratings & Genres** – Assumed that every movie from the API has a valid genre and rating.
 - **Pagination** – The app fetches and displays only a limited number of movies to optimize performance.
-- **CRUD Operations** – The **"Add Movies"** section supports full CRUD, while API-fetched movies are read-only.
+- **CRUD Operations** – The **"Add Movies"** section supports full CRUD, while API-fetched movies are read-only.(User-added movies are stored in local storage for persistence.)
+
+```
+
+```
