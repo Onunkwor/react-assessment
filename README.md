@@ -72,7 +72,7 @@ npm run dev  # or yarn dev
 ### 🔗 API & Data Handling
 
 - **TMDB API Integration** – Used TMDB API for fetching movie data instead of creating a mock backend.
-- **Optimized Search** – Implemented **debouncing** in the search feature to optimize API calls and avoid unnecessary requests.
+- **Optimized Search** – Implemented **debouncing** in the search feature to optimize performance.
 
 ### 🔍 Assumptions Made
 
